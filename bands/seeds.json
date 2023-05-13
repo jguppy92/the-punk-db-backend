@@ -1,0 +1,60 @@
+[
+{
+  "model": "bands.band",
+  "pk": 1,
+  "fields": {
+    "name": "The Clash",
+    "country": "United Kingdom",
+    "city": "London",
+    "members": "Joe Strummer,Paul Simonon",
+    "image": "egfwegf"
+  }
+},
+{
+  "model": "bands.band",
+  "pk": 2,
+  "fields": {
+    "name": "The Stalin",
+    "country": "Japan",
+    "city": "Tokyo",
+    "members": "Nakamura",
+    "image": "wergwe"
+  }
+},
+{
+  "model": "bands.album",
+  "pk": 1,
+  "fields": {
+    "title": "London Calling",
+    "artist": 1,
+    "year": "1979",
+    "color": "Black",
+    "tracklist": "London Calling,Clampdown",
+    "country": "United Kingdom",
+    "genre": "Punk",
+    "image": "fgweg",
+    "on_sale": true,
+    "variants": [
+      2
+    ]
+  }
+},
+{
+  "model": "bands.album",
+  "pk": 2,
+  "fields": {
+    "title": "London Calling",
+    "artist": 1,
+    "year": "1992",
+    "color": "Pink Swirl",
+    "tracklist": "London Calling,Clampdown",
+    "country": "United Kingdom",
+    "genre": "Punk",
+    "image": "fgweg",
+    "on_sale": true,
+    "variants": [
+      1
+    ]
+  }
+}
+]
