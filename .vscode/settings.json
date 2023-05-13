@@ -1,0 +1,13 @@
+{
+  "python.linting.pylintEnabled": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#779cdd",
+    "titleBar.activeBackground": "#779cdd",
+    "titleBar.inactiveBackground": "#779cdd",
+    "titleBar.inactiveForeground": "#000000",
+    "titleBar.activeForeground": "#000000",
+    "statusBar.foreground": "#000000",
+
+  },
+  "window.title": "The Punk DB - SERVER"
+}
