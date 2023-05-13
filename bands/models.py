@@ -30,10 +30,10 @@ class Album(models.Model):
     )
     year = models.CharField(blank=True)
     color = models.CharField(blank=True)
-    variants = models.ForeignKey(
+    variants = models.ManyToManyField(
         'self',
-        on_delete=models.CASCADE,
-        null=True,
+        # on_delete=models.CASCADE,
+        # null=True,
         blank=True
     )
     tracklist = models.CharField(blank=True)
