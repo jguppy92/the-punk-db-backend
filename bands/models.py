@@ -8,13 +8,6 @@ class Band(models.Model):
     city = models.CharField(max_length=150,blank=True)
     members = models.CharField(blank=True)
     image = models.CharField(blank=True)
-    # releases = models.ForeignKey(
-    #     'Album',
-    #     related_name='artist',
-    #     on_delete=CASCADE,
-    #     null=True,
-    #     blank=True
-    # )
 
     def __str__(self):
         return self.name
@@ -32,8 +25,6 @@ class Album(models.Model):
     color = models.CharField(blank=True)
     variants = models.ManyToManyField(
         'self',
-        # on_delete=models.CASCADE,
-        # null=True,
         blank=True
     )
     tracklist = models.CharField(blank=True)
