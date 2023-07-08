@@ -47,11 +47,11 @@ class Query(graphene.ObjectType):
     def resolve_filter_albums(self, info, id):
         return Album.objects.filter(artist=id)
 
-class BandMutation(graphene.Mutation):
+class BandCreation(graphene.Mutation):
 
     class Arguments:
         name = graphene.String(required=True)
-    
+
     band = graphene.Field(BandType)
 
     @classmethod
@@ -60,8 +60,38 @@ class BandMutation(graphene.Mutation):
         band.save()
         return BandMutation(band=band)
 
+class BandMutation(graphene.Mutation):
+
+    class Arguments:
+        id = graphene.ID()
+        name = graphene.String(required=True)
+
+    band = graphene.Field(BandType)
+
+    @classmethod
+    def mutate(cls, root, info, name, id):
+        band = Band.objects.get(id=id)
+        band.name = name
+        band.save()
+        return BandMutation(band=band)
+
+class BandDeletion(graphene.Mutation):
+
+    class Arguments:
+        id = graphene.ID()
+
+    band = graphene.Field(BandType)
+
+    @classmethod
+    def mutate(cls, root, info, id):
+        band = Band.objects.get(id=id)
+        band.delete()
+        return
+
 class Mutation(graphene.ObjectType):
 
+    create_band = BandCreation.Field()
     update_band = BandMutation.Field()
+    delete_band = BandDeletion.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
