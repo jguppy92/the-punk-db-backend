@@ -58,9 +58,9 @@ class BandCreation(graphene.Mutation):
     def mutate(cls, root, info, name):
         band = Band(name=name)
         band.save()
-        return BandMutation(band=band)
+        return BandCreation(band=band)
 
-class BandMutation(graphene.Mutation):
+class BandUpdate(graphene.Mutation):
 
     class Arguments:
         id = graphene.ID()
@@ -73,7 +73,7 @@ class BandMutation(graphene.Mutation):
         band = Band.objects.get(id=id)
         band.name = name
         band.save()
-        return BandMutation(band=band)
+        return BandUpdate(band=band)
 
 class BandDeletion(graphene.Mutation):
 
@@ -86,12 +86,12 @@ class BandDeletion(graphene.Mutation):
     def mutate(cls, root, info, id):
         band = Band.objects.get(id=id)
         band.delete()
-        return
+        return BandDeletion(band=band)
 
 class Mutation(graphene.ObjectType):
 
     create_band = BandCreation.Field()
-    update_band = BandMutation.Field()
+    update_band = BandUpdate.Field()
     delete_band = BandDeletion.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
