@@ -1,12 +1,13 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class Band(models.Model):
-    name = models.CharField(max_length=300,blank=True)
+    name = models.CharField(max_length=300)
     country = models.CharField(max_length=150,blank=True)
     city = models.CharField(max_length=150,blank=True)
-    members = models.CharField(blank=True)
+    members = ArrayField(models.CharField(max_length=1000,blank=True))
     image = models.CharField(blank=True)
 
     def __str__(self):
@@ -21,13 +22,13 @@ class Album(models.Model):
         null=True,
         blank=True
     )
-    year = models.CharField(blank=True)
+    year = models.CharField(max_length=4)
     color = models.CharField(blank=True)
     variants = models.ManyToManyField(
         'self',
         blank=True
     )
-    tracklist = models.CharField(blank=True)
+    tracklist = ArrayField(models.CharField(blank=True))
     country = models.CharField(blank=True)
     genre = models.CharField(blank=True)
     image = models.CharField(blank=True)

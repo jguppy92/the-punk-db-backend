@@ -6,7 +6,7 @@
     "name": "The Clash",
     "country": "United Kingdom",
     "city": "London",
-    "members": "Joe Strummer,Paul Simonon",
+    "members": ["Joe Strummer","Mick Jones","Paul Simonon","Topper Headen"],
     "image": "egfwegf"
   }
 },
@@ -17,7 +17,7 @@
     "name": "The Stalin",
     "country": "Japan",
     "city": "Tokyo",
-    "members": "Nakamura",
+    "members": ["Nakamura"],
     "image": "wergwe"
   }
 },
@@ -25,11 +25,11 @@
   "model": "bands.album",
   "pk": 1,
   "fields": {
-    "title": "London Calling",
+    "title": "The Clash",
     "artist": 1,
     "year": "1979",
     "color": "Black",
-    "tracklist": "London Calling,Clampdown",
+    "tracklist": ["White Riot","Janie Jones"],
     "country": "United Kingdom",
     "genre": "Punk",
     "image": "fgweg",
@@ -47,7 +47,7 @@
     "artist": 1,
     "year": "1992",
     "color": "Pink Swirl",
-    "tracklist": "London Calling,Clampdown",
+    "tracklist": ["London Calling","Clampdown","Guns of Brixton"],
     "country": "United Kingdom",
     "genre": "Punk",
     "image": "fgweg",
