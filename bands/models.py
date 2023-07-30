@@ -7,7 +7,7 @@ class Band(models.Model):
     name = models.CharField(max_length=300)
     country = models.CharField(max_length=150,blank=True)
     city = models.CharField(max_length=150,blank=True)
-    members = ArrayField(models.CharField(max_length=1000,blank=True))
+    members = ArrayField(models.CharField(max_length=1000,blank=True),null=True)
     image = models.CharField(blank=True)
 
     def __str__(self):

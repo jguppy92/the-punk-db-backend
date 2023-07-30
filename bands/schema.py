@@ -65,13 +65,16 @@ class BandUpdate(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
         name = graphene.String(required=True)
+        members = graphene.List(graphene.String,default_value=False)
 
     band = graphene.Field(BandType)
 
     @classmethod
-    def mutate(cls, root, info, name, id):
+    def mutate(cls, root, info, name, id, members):
         band = Band.objects.get(id=id)
         band.name = name
+        if bool(members) is True:
+            band.members = members
         band.save()
         return BandUpdate(band=band)
 
