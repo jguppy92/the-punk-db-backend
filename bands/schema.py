@@ -110,6 +110,24 @@ class AlbumCreate(graphene.Mutation):
         album.save()
         return AlbumCreate(album=album)
 
+class AlbumUpdate(graphene.Mutation):
+
+    class Arguments:
+        id = graphene.ID()
+        title = graphene.String()
+        tracklist = graphene.List(graphene.String,default_value=False)
+
+    album = graphene.Field(AlbumType)
+
+    @classmethod
+    def mutate(cls, root, info, title, id, tracklist):
+        album = Album.objects.get(id=id)
+        album.title = title
+        if bool(tracklist) is True:
+            album.tracklist = tracklist
+        album.save()
+        return AlbumUpdate(album=album)
+
 class AlbumDelete(graphene.Mutation):
 
     class Arguments:
@@ -129,6 +147,7 @@ class Mutation(graphene.ObjectType):
     update_band = BandUpdate.Field()
     delete_band = BandDelete.Field()
     create_album= AlbumCreate.Field()
+    update_album = AlbumUpdate.Field()
     delete_album = AlbumDelete.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
