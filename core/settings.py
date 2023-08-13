@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GRAPHENE = {
     'SCHEMA': 'app.schema.schema' # Where your Graphene schema lives
 }
+
+AUTH_USER_MODEL = 'users.ExtendUser'
