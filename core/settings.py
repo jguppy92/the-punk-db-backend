@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'bands',
     'users',
     'graphene_django',
-    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,17 +130,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GRAPHENE = {
     'SCHEMA': 'app.schema.schema' # Where your Graphene schema lives
 }
-
-AUTH_USER_MODEL = 'users.ExtendUser'
-
-GRAPHENE = {
-    'SCHEMA': 'users.schema.schema',
-    'MIDDLEWARE': [
-        'graphql_jwt.middleware.JSONWebTokenMiddleware',
-    ],
-}
-
-AUTHENTICATION_BACKENDS = [
-    'graphql_jwt.backends.JSONWebTokenBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
