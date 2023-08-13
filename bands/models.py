@@ -9,9 +9,10 @@ class Band(models.Model):
     city = models.CharField(max_length=150,blank=True)
     members = ArrayField(models.CharField(max_length=1000,blank=True),null=True)
     image = models.CharField(blank=True)
+    biography = models.CharField(blank=True, max_length=5000)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Album(models.Model):
     title = models.CharField(blank=True)
@@ -35,4 +36,4 @@ class Album(models.Model):
     on_sale = models.BooleanField(blank=True,null=True)
 
     def __str__(self):
-        return self.title
+        return str(self.title)

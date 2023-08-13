@@ -7,7 +7,8 @@
     "country": "United Kingdom",
     "city": "London",
     "members": ["Joe Strummer","Mick Jones","Paul Simonon","Topper Headen"],
-    "image": "egfwegf"
+    "image": "egfwegf",
+    "biography": "Best band ever."
   }
 },
 {
@@ -17,8 +18,9 @@
     "name": "The Stalin",
     "country": "Japan",
     "city": "Tokyo",
-    "members": ["Nakamura"],
-    "image": "wergwe"
+    "members": ["Michiro Endo","Atsushi Kaneko","Shintaro Sugiyama","Jun Inui"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/0/02/THESTALIN.jpg",
+    "biography": "Best Japanese band ever."
   }
 },
 {
@@ -32,7 +34,7 @@
     "tracklist": ["White Riot","Janie Jones"],
     "country": "United Kingdom",
     "genre": "Punk",
-    "image": "fgweg",
+    "image": "https://upload.wikimedia.org/wikipedia/en/0/00/TheClashLondonCallingalbumcover.jpg",
     "on_sale": true,
     "variants": [
       2
