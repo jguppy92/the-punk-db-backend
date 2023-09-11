@@ -11,19 +11,26 @@ import json
 import pytest
 import requests
 from graphene_django.utils.testing import graphql_query
+from graphene.test import Client
+from bands.schema import schema
 # import conftest
 
+client = Client(schema)
+
 ENDPOINT = "http://localhost:8000/graphql"
+# test_band_id = conftest["data"]["filterBands"]["id"]
 
 def test_create_band():
     res = requests.post(
         ENDPOINT,
         json={
-            'mutation': create_band_mutation
+            'query': create_band_mutation
         },
         timeout=3.0
     )
     res_body = res.json()
+    global test_band_id
+    test_band_id = res_body["data"]["createBand"]["id"]
     print(res_body)
     assert res.status_code == 200
 
@@ -49,20 +56,17 @@ def test_filter_bands():
     )
     res_body = res.json()
     print(res_body)
-    assert res.status_code == 200 and res_body["data"]["filterBands"]["name"] == "The Ruts"
+    assert res.status_code == 200 and res_body["data"]["filterBands"]["name"] == "The Damned"
 
 def test_delete_band_mutation():
     res = requests.post(
         ENDPOINT,
         json={
-            'mutation':"""deleteBand(id: 4){
-                band {
-                    id
-                }
-            }
-        """},
+            'query': delete_band_mutation
+            },
         timeout=3
     )
+    print(res.json())
     assert res.status_code == 200
 
 query_all_bands = """
@@ -76,7 +80,7 @@ query_all_bands = """
 
 filter_bands = """
     {
-    filterBands(id:5){
+    filterBands(id:{test_band_id}){
         id
         name
         }
@@ -84,12 +88,22 @@ filter_bands = """
 """
 
 create_band_mutation = """
-        {
-        createBand(name:"The Ruts"){
-            band{
-                id
-                name
+        mutation {
+            createBand(name:"The Damned"){
+                band{
+                    id
+                    name
+                }
             }
         }
-    }
-"""
+    """
+
+delete_band_mutation = """
+            mutation {
+                deleteBand(id:{test_band_id}){
+                    band {
+                        id
+                    }
+                }
+            }
+        """
