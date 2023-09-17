@@ -1,0 +1,40 @@
+[
+{
+  "model": "users.extenduser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$k5iwqkhoIKviOWNUdEjezr$VVlxrn1s0Dx7BoWteX41bPbmpmMI6gXL3SbWtkJYbIA=",
+    "last_login": null,
+    "is_superuser": true,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-09-11T16:51:40.485Z",
+    "email": "admin@admin.com",
+    "username": "",
+    "country": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.extenduser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ZK3mH8wNHC1DWbShLQteH5$1c9PkhNWrEO6oxWyiee95IAARi8qpbOh+PBF1rg7Y40=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-09-11T16:57:22.140Z",
+    "email": "user1@punkdb..com",
+    "username": "g-man",
+    "country": "Vietnam",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
