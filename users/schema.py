@@ -3,6 +3,7 @@ import graphql_jwt
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 from graphql_jwt.decorators import login_required
+from .models import ExtendUser
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -35,8 +36,24 @@ class CreateUser(graphene.Mutation):
         new_user.save()
         return CreateUser(user=new_user)
 
+class UpdateUser(graphene.Mutation):
+    user = graphene.Field(UserType)
+
+    class Arguments:
+        id = graphene.ID()
+        country = graphene.String(required=False)
+
+    @login_required
+    def mutate(self, info, id, country):
+        user_to_update = ExtendUser.objects.get(id=id)
+        if bool(country) is True:
+            user_to_update.country = country
+        user_to_update.save()
+        return UpdateUser(user=user_to_update)
+
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    update_user = UpdateUser.Field()
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()
