@@ -1,40 +1,23 @@
-# import requests
-
-# ENDPOINT = "http://localhost:8000/graphql"
-
-# def test():
-#     response = requests.post(ENDPOINT)
-#     print(response)
-#     assert 1 == 1
-
 import json
 import pytest
 import requests
 from graphene_django.utils.testing import graphql_query
 from graphene.test import Client
 from bands.schema import schema
-# import conftest
 
 client = Client(schema)
 
 ENDPOINT = "http://localhost:8000/graphql"
-# test_band_id = conftest["data"]["filterBands"]["id"]
-
-def test_create_band():
-    res = requests.post(
-        ENDPOINT,
-        json={
-            'query': create_band_mutation
-        },
-        timeout=3.0
-    )
-    res_body = res.json()
-    global test_band_id
-    test_band_id = res_body["data"]["createBand"]["id"]
-    print(res_body)
-    assert res.status_code == 200
 
 def test_get_all_bands():
+    query_all_bands = """
+        {
+            allBands{
+                id
+                name
+            }
+        }
+    """
     res = requests.post(
         ENDPOINT,
         json={
@@ -46,7 +29,20 @@ def test_get_all_bands():
     print(res_body)
     assert res.status_code == 200
 
-def test_filter_bands():
+def test_new_band(band_1):
+    print(band_1)
+    assert band_1
+
+def test_filter_bands(band_1):
+    test_band_id = band_1["data"]["createBand"]["band"]["id"]
+    filter_bands = f"""
+        \u007b
+            filterBands(id:{test_band_id})\u007b
+                id
+                name
+            \u007d
+        \u007d
+    """
     res = requests.post(
         ENDPOINT,
         json={
@@ -56,9 +52,20 @@ def test_filter_bands():
     )
     res_body = res.json()
     print(res_body)
-    assert res.status_code == 200 and res_body["data"]["filterBands"]["name"] == "The Damned"
+    assert res.status_code == 200 and res_body["data"]["filterBands"]["name"] == "Black Flag"
 
-def test_delete_band_mutation():
+def test_delete_band_mutation(band_1):
+    band_id = band_1["data"]["createBand"]["band"]["id"]
+    print(band_id)
+    delete_band_mutation = f"""
+            mutation \u007b
+                deleteBand(id:{band_id})\u007b
+                    band \u007b
+                        id
+                    \u007d
+                \u007d
+            \u007d
+        """
     res = requests.post(
         ENDPOINT,
         json={
@@ -68,42 +75,3 @@ def test_delete_band_mutation():
     )
     print(res.json())
     assert res.status_code == 200
-
-query_all_bands = """
-    {
-    allBands{
-        id
-        name
-        }
-    }
-"""
-
-filter_bands = """
-    {
-    filterBands(id:{test_band_id}){
-        id
-        name
-        }
-    }
-"""
-
-create_band_mutation = """
-        mutation {
-            createBand(name:"The Damned"){
-                band{
-                    id
-                    name
-                }
-            }
-        }
-    """
-
-delete_band_mutation = """
-            mutation {
-                deleteBand(id:{test_band_id}){
-                    band {
-                        id
-                    }
-                }
-            }
-        """

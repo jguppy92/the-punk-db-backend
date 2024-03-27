@@ -1,26 +1,28 @@
-# import pytest
-# import requests
+import pytest
+import requests
 
-# ENDPOINT = "http://localhost:8000/graphql"
+ENDPOINT = "http://localhost:8000/graphql"
 
-# @pytest.fixture(scope="session")
-# def create_band_1():
-#     create_band_mutation = """
-#         mutation {
-#             createBand(name:"The Damned"){
-#                 band{
-#                     id
-#                     name
-#                 }
-#             }
-#     }
-#     """
-#     res = requests.post(
-#         ENDPOINT,
-#         json={
-#             'query': create_band_mutation
-#         },
-#         timeout=3
-#     )
-#     res_body = res.json()
-#     return res_body
+@pytest.fixture(scope="session")
+def band_1():
+    band = """
+        mutation {
+            createBand(name:"Black Flag"){
+                band{
+                    id
+                    name
+                }
+            }
+    }
+    """
+    res = requests.post(
+        ENDPOINT,
+        json={
+            'query': band
+        },
+        timeout=3
+    )
+    print("create-band")
+    res_body = res.json()
+    print(res_body)
+    return res_body
